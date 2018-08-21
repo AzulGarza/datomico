@@ -26,7 +26,7 @@ Porfa descarguen el env a ver si funciona en Windows y/o MacOS.
 5. Archivos tar 
 `7za x <filename.tar.7za>` Esto nos deja filename.tar. 
 6. Para extraer los archivos de filename.tar => `tar -xf <filename.tar>`
-7. Pongan los datos en un folder `data` dentro de `prueba.ipynb`
+7. Pongan los datos en un folder `data` dentro de `datomico/`
 
 #### Nota:
 Pasos para que el kernel de jupyter funcione de acuerdo al env en anaconda: 
