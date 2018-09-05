@@ -15,9 +15,18 @@ Porfa descarguen el env a ver si funciona en Windows y/o MacOS.
 
 
 ### Para que ustedes tengan los datos también y no tener que subirlos al repositorio:
-kaggle cli.
-
-
+1. Instalen kaggle-cli
+`pip install kaggle-cli`
+2. Configuren su cuenta de kaggle
+`kg config -u <usuario (email)> -p <contraseña> -c <nombre-competencia>`
+3. Descargar los datos
+`kg download`
+4. Archivos zip
+`unzip -q <filename.zip>`
+5. Archivos tar 
+`7za x <filename.tar.7za>` Esto nos deja filename.tar. 
+6. Para extraer los archivos de filename.tar => `tar -xf <filename.tar>`
+7. Pongan los datos en un folder `data/` dentro de `datomico/`
 
 #### Nota:
 Pasos para que el kernel de jupyter funcione de acuerdo al env en anaconda: 
