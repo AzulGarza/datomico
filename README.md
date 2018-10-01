@@ -4,7 +4,7 @@ Porfa descarguen el env a ver si funciona en Windows y/o MacOS.
 
 
 ## Requisitos:
-- Anaconda python 3.7
+- Anaconda python 3.6 o 3.7
 
 # Instalación
 1. `git clone https://github.com/datomicomx/datomico.git`
