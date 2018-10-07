@@ -197,5 +197,4 @@ dependencies:
     - stevedore==1.29.0
     - torch==0.4.1
     - werkzeug==0.14.1
-prefix: /home/samuel/anaconda3/envs/datomico
 
