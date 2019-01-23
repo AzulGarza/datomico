@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+from geopy.geocoders import Nominatim, Photon, ArcGIS
+from tqdm import tqdm
+import time
 
 
 def read_tables(table_names):
@@ -66,3 +69,56 @@ def df_to_d3map(df, columns):
     """
     df = df[columns]
     return df
+
+
+class Geocode:
+    def __init__(self, df, Number=None, Street=None, Col=None):
+        self.df = df
+        self.Number = Number
+        self.Street = Street
+        self.Col = Col
+
+    def addr_to_lat_lon(self, df, Number=None, Street=None, Col=None):
+        """
+        Returns the latitude and logitude for a particular address.
+        """
+        geocode = self.df[Number].astype('str') + ', ' + self.df[Street].astype('str') + \
+                    ', ' + self.df[Col] + ', Álvaro Obregón, CDMX, México '
+        return geocode
+    
+    def geocode(self, address=None):
+        i = 0
+        geocoders = [arcgis, photon, nominatim]
+        try:
+            while i < len(geocoders):
+                location = geocoders[i].geocode(address)
+                if location != None:
+                    lat, lon = location.latitude, location.longitude
+                return lat, lon
+            else:
+                i += 1
+        except:
+            # catch whatever errors, likely timeout, and return null values
+            # print(sys.exc_info()[0])
+            return('null')
+
+        # if all services have failed to geocode, return null values
+        return('null')
+
+    def get_lat_long(self, df, col):
+        latitude = []
+        longitude = []
+        address = []
+        for addr in tqdm(self.df[col]):
+            try:
+                print("Buscando: {}".format(addr))
+                lat, lon = geocode(addr)
+            except:
+                lat, lon = None, None
+            latitude.append(lat)
+            longitude.append(lon)
+            address.append(addr)
+            print("Se obtuvo {},{}".format(lat, lon))
+            time.sleep(1)
+            
+        return latitude, longitude, address
