@@ -72,27 +72,32 @@ def df_to_d3map(df, columns):
 
 
 class Geocode:
-    def __init__(self, df, Number=None, Street=None, Col=None):
+    def __init__(self, df, Number, Street, Col):
         self.df = df
         self.Number = Number
         self.Street = Street
         self.Col = Col
 
-    def addr_to_lat_lon(self, df, Number=None, Street=None, Col=None):
+    def build_address(self):
         """
-        Returns the latitude and logitude for a particular address.
+        Returns the address from different columns.
         """
-        geocode = self.df[Number].astype('str') + ', ' + self.df[Street].astype('str') + \
-                    ', ' + self.df[Col] + ', Álvaro Obregón, CDMX, México '
-        return geocode
-    
-    def geocode(self, address=None):
-        i = 0
+        address = self.df[self.Number].astype('str') + ', ' + \
+            self.df[self.Street].astype('str') + \
+            ', ' + self.df[self.Col] + ', Álvaro Obregón, CDMX, México'
+        return address
+
+    def geocode(self, address):
+        arcgis = ArcGIS(timeout=100)
+        nominatim = Nominatim(timeout=100, user_agent="homework")
+        photon = Photon(timeout=100, user_agent="homework")
         geocoders = [arcgis, photon, nominatim]
+
+        i = 0
         try:
             while i < len(geocoders):
                 location = geocoders[i].geocode(address)
-                if location != None:
+                if location is not None:
                     lat, lon = location.latitude, location.longitude
                 return lat, lon
             else:
@@ -105,20 +110,20 @@ class Geocode:
         # if all services have failed to geocode, return null values
         return('null')
 
-    def get_lat_long(self, df, col):
+    def get_lat_long_from_address(self, address):
         latitude = []
         longitude = []
-        address = []
-        for addr in tqdm(self.df[col]):
+        full_addr = []
+        for addr in tqdm(address):
             try:
-                print("Buscando: {}".format(addr))
-                lat, lon = geocode(addr)
+                tqdm.write("Buscando: {}".format(addr))
+                lat, lon = self.geocode(addr)
             except:
                 lat, lon = None, None
             latitude.append(lat)
             longitude.append(lon)
-            address.append(addr)
-            print("Se obtuvo {},{}".format(lat, lon))
+            full_addr.append(addr)
+            tqdm.write("Se obtuvo {},{}".format(lat, lon))
             time.sleep(1)
-            
-        return latitude, longitude, address
+
+        return latitude, longitude, full_addr
