@@ -114,7 +114,7 @@ class Geocode:
         latitude = []
         longitude = []
         full_addr = []
-        for addr in tqdm(address):
+        for addr in tqdm(addres):
             try:
                 tqdm.write("Buscando: {}".format(addr))
                 lat, lon = self.geocode(addr)
