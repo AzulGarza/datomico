@@ -24,7 +24,7 @@ dependencies:
   - pandas
   - pathlib
   - pillow
-  - pip=10.0.1=py36_0
+  - pip
   - pyqt
   - python=3.6.8
   - tqdm
