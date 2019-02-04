@@ -10,8 +10,11 @@ Porfa descarguen el env a ver si funciona en Windows y/o MacOS.
 1. `git clone https://github.com/datomicomx/datomico.git`
 2. `cd datomico`
 3. `conda env update`
-4. Para linux/Mac: `source activate datomico` Para Windows (wakatelas): `conda activate datomico` 
-5. Corran prueba.ipynb por si hay errores. Les deberá crear un archivo que se llama TPV_10mil_adultos.csv en data/
+4. Para linux/Mac: `source activate datomico`
+5. Corran prueba.ipynb
+6. Para LabelWidgets:
+  1. `pip install ipywidgets`
+  2. `jupyter nbextension enable --py widgetsnbextension`
 
 #### Nota:
 Pasos para que el kernel de jupyter funcione de acuerdo al env en anaconda: 
